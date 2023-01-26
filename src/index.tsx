@@ -94,6 +94,10 @@ interface BalancerProps extends React.HTMLAttributes<HTMLElement> {
    * @default 1
    */
   ratio?: number
+  /**
+   * An id to be used to check for the wrapper container element 
+   */
+  brId?: string
   children?: React.ReactNode
 }
 
@@ -116,10 +120,11 @@ const Provider: React.FC<{
 const Balancer: React.FC<BalancerProps> = ({
   as: Wrapper = 'span',
   ratio = 1,
+  brId,
   children,
   ...props
 }) => {
-  const id = React.useId()
+  const id = brId || React.useId()
   const wrapperRef = React.useRef<WrapperElement>()
   const hasProvider = React.useContext(BalancerContext)
 
